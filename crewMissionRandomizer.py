@@ -2,7 +2,7 @@ import random as rd
 import re
 import sys
 
-replace_color = True
+replace_color = False
 
 if len(sys.argv) < 3:
     nbPlayers = 3
@@ -22,7 +22,7 @@ class Mission:
         match = re.match(r"\((\d)/(\d)/(\d)\) (.+)", level)
         if match:
             self.levels = [int(match.group(1)), int(match.group(2)), int(match.group(3))]
-            if replace_color : self.description = match.group(4).replace("green","clubs").replace("blue","spades").replace("pink","hearts").replace("yellow","diamonds").replace("submarines","[faces or jokers]").replace("submarine","[face or joker]")
+            if replace_color : self.description = match.group(4).replace("green","club ♣").replace("blue","spade ♠").replace("pink","heart ♥").replace("yellow","diamond ♦").replace("submarines","[ faces 🃛🂭🂾 or jokers 🂿 ]").replace("submarine","[ face 🃛🂭🂾 or joker 🂿 ]")
             else : self.description = match.group(4)
         else:
             self.levels = []
@@ -48,7 +48,8 @@ for mission in mission_objects:
     if missionLevel <= 0:
         break
 
-if replace_color : print("Missions for this operation: (reminder : Joker player capitain with Submarine 2)")
-else : print("Missions for this operation:")
+print("\n Missions for this operation:")
 for mission in missions_for_now:
-    print(f"- {mission}")
+    print(f"  {mission}")
+if replace_color : print(" Reminder : Submarine order is J, 🂿, Q, K. Captain is 🂿 \n")
+else: print("")

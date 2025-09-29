@@ -14,12 +14,13 @@
   <body x-data="{app: new App()}">
     <div class="container">
       <h1>THE CREW : Mission Deep Sea mission generator</h1>
-      <button @click="open = ! open">Toggle</button>
       <select x-model="app.players">
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+        <option value="3">3 Players</option>
+        <option value="4">4 Players</option>
+        <option value="5">5 Players</option>
       </select>
+
+      <a>Difficulty (1-100): </a>
       <input
         type="number"
         x-model="app.difficulty"
@@ -28,14 +29,17 @@
         max="100"
       />
 
-      <input type="checkbox" x-model="app.converted" value="true"/> Converted types
+      <input type="checkbox" x-model="app.converted" value="true" /> Converted
+      types
 
-      <button @click="app.generateMissions()">Generate Missions</button>
+      <div>
+        <button @click="app.generateMissions()">Generate Missions</button>
+      </div>
       <div class="missions">
         <template x-for="mission in app.missions" :key="mission.description">
           <div class="mission-card">
-            <h2 x-text="mission.difficulty"></h2>
-            <p x-text="mission.description"></p>
+            <a x-text="mission.difficulty" class="mission-difficulty"></a>
+            <a x-text="mission.description" class="mission-description"></a>
           </div>
         </template>
       </div>

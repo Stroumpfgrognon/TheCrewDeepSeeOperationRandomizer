@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Crew Mission Generator</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script type="module" src="/static/app.js" defer></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body x-data="{app: new App()}">
+    <div class="container">
+      <h1>THE CREW : Mission Deep Sea mission generator</h1>
+      <button @click="open = ! open">Toggle</button>
+      <select x-model="app.players">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <input
+        type="number"
+        x-model="app.difficulty"
+        @input="app.updateDifficulty($event.target.value)"
+        min="1"
+        max="100"
+      />
+
+      <input type="checkbox" x-model="app.converted" value="true"/> Converted types
+
+      <button @click="app.generateMissions()">Generate Missions</button>
+      <div class="missions">
+        <template x-for="mission in app.missions" :key="mission.description">
+          <div class="mission-card">
+            <h2 x-text="mission.difficulty"></h2>
+            <p x-text="mission.description"></p>
+          </div>
+        </template>
+      </div>
+
+      <h1 x-text="app.skibidi"></h1>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+.container{
+    margin:auto;
+    max-width:80%;
+    align-self:center;
+    text-align:center;
+}
+
+.missions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    flex-direction: row;
+}
+
+.mission-card{
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    width:150px;
+    aspect-ratio: 1/1;
+    background-color: lightgrey;
+    box-shadow: 5px 5px 5px grey;
+}

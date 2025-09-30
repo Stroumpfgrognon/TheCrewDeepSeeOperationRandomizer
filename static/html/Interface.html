@@ -4,14 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Crew Mission Generator</title>
-    <link rel="stylesheet" href="/static/style.css" />
-    <script type="module" src="/static/app.js" defer></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/popup.css" />
+    <script type="module" src="/static/js/app.js" defer></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
   </head>
-  <body x-data="{app: new App()}">
+  <body
+    x-data="{app: new App()}"
+    @mousemove="app.popup.move(event)"
+    @mouseup.prevent="app.handleMouseUp()"
+  >
+    <div id="popup_area" hidden="true" class="blocking">
+      <div id="popup">
+        <div class="popuptop" @mousedown="app.popup.setMoving($event)">
+          <h3 id="popup_title">Popup</h3>
+          <button id="popup_exit" @click="app.popup.done(event)">X</button>
+        </div>
+        <div id="popup_body" :style="`background-color : var(--ui-P${app.popup.behaviour.hovered_player})`"></div>
+      </div>
+    </div>
     <div class="container">
       <h1>THE CREW : Mission Deep Sea mission generator</h1>
       <select x-model="app.players">
@@ -37,7 +51,7 @@
       </div>
       <div class="missions">
         <template x-for="mission in app.missions" :key="mission.description">
-          <div class="mission-card">
+          <div class="mission-card" @dblclick="app.popup.show('selection')">
             <a x-text="mission.difficulty" class="mission-difficulty"></a>
             <a x-text="mission.description" class="mission-description"></a>
           </div>

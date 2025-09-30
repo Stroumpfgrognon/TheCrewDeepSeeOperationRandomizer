@@ -1,3 +1,5 @@
+import Popup from "./popup.js";
+
 class Mission {
   difficulty;
   description;
@@ -13,6 +15,7 @@ class App {
   difficulty;
   missions;
   converted;
+  popup;
 
   constructor() {
     this._init();
@@ -23,6 +26,11 @@ class App {
     this.difficulty = 3;
     this.converted = false;
     this.missions = [];
+    this.popup = new Popup();
+  }
+
+  handleMouseUp() {
+    this.popup.clearMoving();
   }
 
   updatePlayers(nb) {
@@ -40,6 +48,10 @@ class App {
         this.converted
     );
     console.log(this.missions);
+  }
+
+  setPlayer(player){
+
   }
 
   generateMissions() {

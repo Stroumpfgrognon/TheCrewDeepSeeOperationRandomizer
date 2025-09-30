@@ -1,0 +1,74 @@
+:root {
+  --bg-color: #252525;
+  --svg-color: rgb(174, 174, 174);
+  --ui-color: #474747;
+  --ui-color-op: rgba(30, 30, 30, 0.511);
+  --ui-highlight: #5d5d5d;
+  --ui-highlight-subtle: rgb(57, 57, 57);
+  --ui-text-color: white;
+  --ui-danger: #ef233c;
+  --ui-danger-detail: #530d15;
+  --ui-ok: rgb(74, 208, 74);
+  --ui-ok-detail: rgb(19, 51, 19);
+  --ui-detail: #40affe;
+  --ui-detail-detail: #112f44;
+  --ui-P1: #ef233c;
+  --ui-P2: #40affe;
+  --ui-P3: #ffd166;
+  --ui-P4: #06d6a0;
+  --ui-P5: #8338ec;
+}
+
+body {
+  overflow: hidden;
+}
+
+.container {
+  margin: auto;
+  max-width: 80%;
+  align-self: center;
+  text-align: center;
+}
+
+.missions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.mission-card {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  aspect-ratio: 1/1;
+  background-color: lightgrey;
+  box-shadow: 5px 5px 5px grey;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  /* align-content: stretch; */
+  justify-content: space-between;
+}
+
+.mission-difficulty {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  border: 2px solid black;
+  aspect-ratio: 1;
+  border-radius: 200px;
+}
+
+.mission-description {
+  font-size: 1em;
+  height: auto;
+  text-align: center;
+  height: 70%;
+  max-height: 100%;
+  text-align: justify;
+}

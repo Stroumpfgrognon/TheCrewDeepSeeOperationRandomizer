@@ -1,0 +1,16 @@
+<div
+  class="popup-center"
+  style="height:100%;"
+>
+  <div class="select-player">
+    <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(1)" style="background-color: var(--ui-P1)" @click="app.setPlayer(1); app.popup.done()">P1</button>
+    <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(2)" style="background-color: var(--ui-P2)" @click="app.setPlayer(2); app.popup.done()">P2</button>
+    <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(3)" style="background-color: var(--ui-P3)" @click="app.setPlayer(3); app.popup.done()">P3</button>
+    <template x-if="app.players>=4">
+      <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(4)" style="background-color: var(--ui-P4)" @click="app.setPlayer(4); app.popup.done()">P4</button>
+    </template>
+    <template x-if="app.players>=5">
+      <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(5)" style="background-color: var(--ui-P5)" @click="app.setPlayer(5); app.popup.done()">P5</button>
+    </template>
+  </div>
+</div>

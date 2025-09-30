@@ -23,7 +23,10 @@
           <h3 id="popup_title">Popup</h3>
           <button id="popup_exit" @click="app.popup.done(event)">X</button>
         </div>
-        <div id="popup_body" :style="`background-color : var(--ui-P${app.popup.behaviour.hovered_player})`"></div>
+        <div
+          id="popup_body"
+          :style="`background-color : var(--ui-P${app.popup.behaviour.hovered_player}-light)`"
+        ></div>
       </div>
     </div>
     <div class="container">
@@ -50,9 +53,21 @@
         <button @click="app.generateMissions()">Generate Missions</button>
       </div>
       <div class="missions">
-        <template x-for="mission in app.missions" :key="mission.description">
-          <div class="mission-card" @dblclick="app.popup.show('selection')">
+        <template x-for="mission in app.missions" :key="mission.id">
+          <div
+            class="mission-card"
+            @dblclick="app.selectMission(mission.id); app.popup.show('selection')"
+            :style="`background-color : var(--ui-P${app.missions.find(m => m.id===mission.id).player}-light); color : var(--ui-P${app.missions.find(m => m.id===mission.id).player})`"
+          >
             <a x-text="mission.difficulty" class="mission-difficulty"></a>
+            <template
+              x-if="app.missions.find(m => m.id===mission.id).player!=null"
+            >
+              <a
+                class="mission-player"
+                x-text="`P${app.missions.find(m => m.id===mission.id).player}`"
+              ></a>
+            </template>
             <a x-text="mission.description" class="mission-description"></a>
           </div>
         </template>

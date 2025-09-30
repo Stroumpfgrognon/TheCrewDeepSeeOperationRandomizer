@@ -12,11 +12,16 @@
   --ui-ok-detail: rgb(19, 51, 19);
   --ui-detail: #40affe;
   --ui-detail-detail: #112f44;
-  --ui-P1: #ef233c;
-  --ui-P2: #40affe;
-  --ui-P3: #ffd166;
-  --ui-P4: #06d6a0;
-  --ui-P5: #8338ec;
+  --ui-P1: #f20f2a;
+  --ui-P2: #0081dd;
+  --ui-P3: #ffbf00;
+  --ui-P4: #00ad26;
+  --ui-P5: #7f23ff;
+  --ui-P1-light: #ffbec6;
+  --ui-P2-light: #a2e0ff;
+  --ui-P3-light: #fff4c4;
+  --ui-P4-light: #a4ffb7;
+  --ui-P5-light: #dcc2ff;
 }
 
 body {
@@ -46,12 +51,10 @@ body {
   aspect-ratio: 1/1;
   background-color: lightgrey;
   box-shadow: 5px 5px 5px grey;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-wrap: nowrap;
-  /* align-content: stretch; */
-  justify-content: space-between;
+  display: grid;
+  grid-template: "level player"
+                 "description description" / 20% 80%;
+  grid-template-rows: 25% 75%;
 }
 
 .mission-difficulty {
@@ -62,6 +65,7 @@ body {
   border: 2px solid black;
   aspect-ratio: 1;
   border-radius: 200px;
+  grid-area: level;
 }
 
 .mission-description {
@@ -71,4 +75,13 @@ body {
   height: 70%;
   max-height: 100%;
   text-align: justify;
+  grid-area: description;
+}
+
+.mission-player {
+  grid-area: player;
+  text-align:right;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

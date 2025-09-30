@@ -193,10 +193,18 @@
 
 .select-player button {
   aspect-ratio: 1;
-  font-size: 60px;
+  font-size: 70px;
   transition: all 0.2s ease-in-out;
-  max-height:200px;
-  max-width:200px;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.select-player:has(.P4) button{
+  font-size: 60px;
+}
+
+.select-player:has(.P5) button{
+  font-size: 50px;
 }
 
 .select-player button:hover {
@@ -210,6 +218,28 @@
   max-width: 300px;
 }
 
-#popup_exit:hover{
-  color:var(--ui-danger);
+.select-player:has(button:hover) button:not(:hover) {
+  font-size:40px;
+  max-height: 120px;
+  max-width: 120px;
+}
+
+#popup_exit:hover {
+  color: var(--ui-danger);
+}
+
+.P1 {
+  background-color: var(--ui-P1) !important;
+}
+.P2 {
+  background-color: var(--ui-P2) !important;
+}
+.P3 {
+  background-color: var(--ui-P3) !important;
+}
+.P4 {
+  background-color: var(--ui-P4) !important;
+}
+.P5 {
+  background-color: var(--ui-P5) !important;
 }

@@ -1,0 +1,215 @@
+#popup_area {
+  display: grid;
+  position: absolute;
+  grid-template-areas:
+    ". . ."
+    ". popup ."
+    ". . .";
+  grid-template-rows: 20% 1fr 20%;
+  grid-template-columns: 20% 1fr 20%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+#popup_area * {
+  pointer-events: all;
+}
+
+#popup_area[hidden] {
+  display: none;
+}
+
+#popup {
+  background-color: var(--ui-color);
+  display: grid;
+  grid-template-areas:
+    "top"
+    "content";
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 1fr;
+  width: 100%;
+  height: 100%;
+  grid-area: popup;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 50) 0 0 10px;
+  color: var(--ui-text-color);
+}
+
+#popup_body {
+  max-height: 600px;
+  padding: 1em;
+}
+
+.popuptop {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  grid-area: top;
+  background-color: var(--ui-highlight);
+  text-align: center;
+  color: var(--ui-text-color);
+  border-radius: 20px 20px 0 0;
+}
+
+.popuptop h3 {
+  font-size: small;
+  display: inline;
+}
+
+.popuptop button {
+  align-self: flex-start;
+  float: right;
+  position: absolute;
+  width: 50px;
+  left: calc(100% - 50px);
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--ui-text-color);
+  overflow: hidden;
+  border: none;
+  z-index: 10;
+}
+
+.popuptop button:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.popup-center {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+#popup_body button {
+  cursor: pointer;
+  width: 80%;
+  border-radius: 15px;
+  background-color: var(--ui-highlight);
+  border: none;
+  outline: none;
+  box-shadow: none;
+  text-align: center;
+  align-self: center;
+  padding: 0.3em;
+  color: var(--ui-text-color);
+}
+
+.blocking {
+  pointer-events: all !important;
+}
+
+.blocking > div {
+  box-shadow: 0px 0px 100em 100em rgba(0, 0, 0, 0.4) !important;
+}
+
+#export_preview {
+  padding: 1em;
+  font-size: xx-large;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#export_preview svg {
+  width: 100%;
+  height: 100%;
+}
+
+#export_svg {
+  color: var(--ui-text-color);
+  background-color: var(--ui-highlight);
+  padding: 1em;
+  width: 60%;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.opacity_sway {
+  animation-name: opacity-sway;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes opacity-sway {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+#popup_import {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+#popup_import h2 {
+  margin-bottom: 0;
+}
+
+#popup_import > div {
+  width: 100%;
+}
+
+.full-popup {
+  font-size: 5em;
+}
+
+.select-player {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5%;
+  height: fit-content;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.select-player button {
+  aspect-ratio: 1;
+  font-size: 60px;
+  transition: all 0.2s ease-in-out;
+  max-height:200px;
+  max-width:200px;
+}
+
+.select-player button:hover {
+  font-size: 100px;
+  border-radius: 200px;
+  animation-name: opacity-sway;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  max-height: 300px;
+  max-width: 300px;
+}
+
+#popup_exit:hover{
+  color:var(--ui-danger);
+}

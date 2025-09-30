@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=['GET'])
 def index():
-    return send_from_directory("static","./Interface.html")
+    return send_from_directory("static/html","Interface.html")
 
 @app.route('/generate',methods=['GET'])
 def generate():

@@ -53,6 +53,7 @@
   text-align: center;
   color: var(--ui-text-color);
   border-radius: 20px 20px 0 0;
+  cursor: grab;
 }
 
 .popuptop h3 {
@@ -88,6 +89,12 @@
   justify-content: center;
   flex-wrap: nowrap;
   flex-direction: column;
+}
+
+.popup-view {
+  border-radius:20px;
+  padding: 1em;
+  box-sizing: border-box;
 }
 
 #popup_body button {
@@ -182,10 +189,14 @@
 
 .select-player:has(.P4) button{
   font-size: 60px;
+  max-width:180px;
+  max-height:180px;
 }
 
 .select-player:has(.P5) button{
   font-size: 50px;
+  max-width:150px;
+  max-height:150px;
 }
 
 .select-player button:hover {
@@ -207,4 +218,8 @@
 
 #popup_exit:hover {
   color: var(--ui-danger);
+}
+
+.popup_rounded {
+  border-radius: 0 0 20px 20px;
 }

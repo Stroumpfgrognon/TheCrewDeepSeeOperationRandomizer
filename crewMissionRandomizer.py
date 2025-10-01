@@ -50,7 +50,7 @@ def generate_missions(players: int, level: int):
     current_level = 0
     rd.shuffle(mission_objects)
     for mission in mission_objects:
-        if mission.getLevel() <= level and (mission not in selected_missions):
+        if mission.getLevel(players) <= level and (mission not in selected_missions):
             selected_missions.append(mission)
             current_level += mission.getLevel(players)
             level -= mission.getLevel(players)

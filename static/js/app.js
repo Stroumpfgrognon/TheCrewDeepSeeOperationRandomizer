@@ -26,6 +26,7 @@ class Mission extends MovableObject {
   setMoving(event) {
     // if start moving the pop up, we store the mouse's position
     // if (this.dom === null)
+    if (this.completed) return;
     this.dom = document.getElementById("miss-" + this.id);
     if (this.dom === null) {
       console.warn("Mission DOM element not found");
@@ -73,9 +74,13 @@ class App {
         "P" + this.player_to_attribute + "-missions"
       );
       pm.classList.remove("opacity_sway");
-      this.setPlayer(this.player_to_attribute);
+      if (
+        this.missions.find((m) => m.id === this.selected_mission_id)
+          .completed === false
+      )
+        this.setPlayer(this.player_to_attribute);
     }
-    if (this.is_moving_mission) {
+    if (this.is_moving_mission || this.popup.dom.hidden === true) {
       this.selected_mission_id = null;
     }
     this.popup.clearMoving();
@@ -88,7 +93,7 @@ class App {
     this.popup.move(event);
     this.missions.forEach((m) => m.move(event));
     let attributed_player = null;
-    if (this.is_moving_mission) {
+    if (this.is_moving_mission && this.selected_mission_id !== null && this.missions.find((m) => m.id === this.selected_mission_id).completed === false) {
       for (let i = 0; i < this.current_players; i++) {
         let pm = document.getElementById("P" + (i + 1) + "-missions");
         let pos = [event.clientX, event.clientY];
@@ -119,6 +124,12 @@ class App {
 
   selectMission(id) {
     this.selected_mission_id = id;
+  }
+
+  flipMission(id) {
+    let targeted_mission = this.missions.find((m) => m.id === id);
+    if (targeted_mission === undefined) return;
+    targeted_mission.completed = !targeted_mission.completed;
   }
 
   setPlayer(player) {
@@ -159,6 +170,7 @@ class App {
           let mission = new Mission(data[i].difficulty, data[i].description);
           this.missions.push(mission);
         }
+        console.log(this.missions);
       });
   }
 }

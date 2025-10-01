@@ -63,6 +63,7 @@ class Popup extends MovableObject {
     this.moving = false;
     this.behaviour = new PopupBehaviour();
     this.inputmode = false;
+    this.hidden= true;
     // If the user presses escape, the pop up is closed
     window.addEventListener("keyup", (event) => {
       if (event.key === "Escape") {
@@ -100,17 +101,16 @@ class Popup extends MovableObject {
     // we set the title of the pop up
     this.title.textContent = title;
     // we put no padding
-    console.log(event);
     this.setPosition(0, window.scrollY);
     // we display the pop up
-    this.dom.hidden = false;
+    this.hidden = false;
   }
 
   close() {
     /*
     This function hides the pop up in the window
     */
-    this.dom.hidden = true;
+    this.hidden = true;
   }
 
   done() {
@@ -171,7 +171,6 @@ class playerSelectPopup extends PopupBehaviour {
 
   setHoveredPlayer(player) {
     this.hovered_player = player;
-    // console.log("New hovered player :",this.hovered_player);
   }
 }
 

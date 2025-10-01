@@ -139,25 +139,6 @@
   text-decoration: none;
 }
 
-.opacity_sway {
-  animation-name: opacity-sway;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-@keyframes opacity-sway {
-  0% {
-    opacity: 100%;
-  }
-  50% {
-    opacity: 50%;
-  }
-  100% {
-    opacity: 100%;
-  }
-}
-
 #popup_import {
   display: flex;
   flex-direction: column;
@@ -226,20 +207,4 @@
 
 #popup_exit:hover {
   color: var(--ui-danger);
-}
-
-.P1 {
-  background-color: var(--ui-P1) !important;
-}
-.P2 {
-  background-color: var(--ui-P2) !important;
-}
-.P3 {
-  background-color: var(--ui-P3) !important;
-}
-.P4 {
-  background-color: var(--ui-P4) !important;
-}
-.P5 {
-  background-color: var(--ui-P5) !important;
 }

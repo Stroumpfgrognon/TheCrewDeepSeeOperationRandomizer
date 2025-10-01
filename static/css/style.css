@@ -24,15 +24,70 @@
   --ui-P5-light: #dcc2ff;
 }
 
+@keyframes opacity-sway {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
 body {
-  overflow: hidden;
+  overflow-x:hidden;
+  overflow-y:scroll;
 }
 
 .container {
   margin: auto;
-  max-width: 80%;
+  display: block;
+  width: 100%;
   align-self: center;
   text-align: center;
+}
+
+.P1 {
+  background-color: var(--ui-P1) !important;
+}
+.P2 {
+  background-color: var(--ui-P2) !important;
+}
+.P3 {
+  background-color: var(--ui-P3) !important;
+}
+.P4 {
+  background-color: var(--ui-P4) !important;
+}
+.P5 {
+  background-color: var(--ui-P5) !important;
+}
+
+.P1-light {
+  background-color: var(--ui-P1-light) !important;
+  color: var(--ui-P1) !important;
+}
+
+.P2-light {
+  background-color: var(--ui-P2-light) !important;
+  color: var(--ui-P2) !important;
+}
+
+.P3-light {
+  background-color: var(--ui-P3-light) !important;
+  color: var(--ui-P3) !important;
+}
+
+.P4-light {
+  background-color: var(--ui-P4-light) !important;
+  color: var(--ui-P4) !important;
+}
+
+.P5-light {
+  background-color: var(--ui-P5-light) !important;
+  color: var(--ui-P5) !important;
 }
 
 .missions {
@@ -43,6 +98,7 @@ body {
 }
 
 .mission-card {
+  position: relative;
   border: 2px solid black;
   border-radius: 15px;
   padding: 10px;
@@ -52,9 +108,17 @@ body {
   background-color: lightgrey;
   box-shadow: 5px 5px 5px grey;
   display: grid;
-  grid-template: "level player"
-                 "description description" / 20% 80%;
+  grid-template:
+    "level player"
+    "description description" / 20% 80%;
   grid-template-rows: 25% 75%;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .mission-difficulty {
@@ -80,8 +144,43 @@ body {
 
 .mission-player {
   grid-area: player;
-  text-align:right;
+  text-align: right;
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.player-missions-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-content: center;
+  gap: 10px;
+}
+
+.player-missions {
+  min-width: 100px;
+  max-width: 400px;
+  width: 100%;
+  min-height: 250px;
+  height: fit-content;
+  padding-bottom:20px;
+}
+
+.player-missions-container:has(.P4-light) .player-missions {
+  max-width: 300px;
+}
+.player-missions-container:has(.P5-light) .player-missions {
+  max-width: 250px;
+}
+
+.opacity_sway {
+  animation-name: opacity-sway;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }

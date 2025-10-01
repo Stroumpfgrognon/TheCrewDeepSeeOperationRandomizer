@@ -14,11 +14,11 @@
   </head>
   <body
     x-data="{app: new App()}"
-    @mousemove="app.popup.move(event)"
+    @mousemove="app.handleMouseMove($event)"
     @mouseup.prevent="app.handleMouseUp()"
   >
     <div id="popup_area" hidden="true" class="blocking">
-      <div id="popup">
+      <div id="popup" @click.outside="app.popup.done()">
         <div class="popuptop" @mousedown="app.popup.setMoving($event)">
           <h3 id="popup_title">Popup</h3>
           <button id="popup_exit" @click="app.popup.done(event)">X</button>
@@ -52,28 +52,71 @@
       <div>
         <button @click="app.generateMissions()">Generate Missions</button>
       </div>
-      <div class="missions">
-        <template x-for="mission in app.missions" :key="mission.id">
+      <div class="player-missions-container">
+        <template x-for="i in parseInt(app.current_players)">
           <div
-            class="mission-card"
-            @dblclick="app.selectMission(mission.id); app.popup.show('selection')"
-            :style="`background-color : var(--ui-P${app.missions.find(m => m.id===mission.id).player}-light); color : var(--ui-P${app.missions.find(m => m.id===mission.id).player})`"
+            :id="'P'+i+'-missions'"
+            class="player-missions"
+            :class="`P${i}-light`"
           >
-            <a x-text="mission.difficulty" class="mission-difficulty"></a>
-            <template
-              x-if="app.missions.find(m => m.id===mission.id).player!=null"
-            >
-              <a
-                class="mission-player"
-                x-text="`P${app.missions.find(m => m.id===mission.id).player}`"
-              ></a>
-            </template>
-            <a x-text="mission.description" class="mission-description"></a>
+            <a class="mission-player" x-text="`P${i}`"></a>
+            <div class="missions">
+              <template x-for="mission in app.missions" :key="mission.id">
+                <template x-if="mission.player==i">
+                  <div
+                    :id="'miss-' + mission.id"
+                    class="mission-card"
+                    @dblclick="app.selectMission(mission.id); app.popup.show($event,'selection')"
+                    :class="`P${app.missions.find(m => m.id===mission.id).player}-light`"
+                    @mousedown="app.selectMission(mission.id); app.is_moving_mission = true; app.missions.find(m => m.id===mission.id).setMoving($event)"
+                  >
+                    <a
+                      x-text="mission.difficulty"
+                      class="mission-difficulty"
+                    ></a>
+                    <template
+                      x-if="app.missions.find(m => m.id===mission.id).player!=null"
+                    >
+                      <a
+                        class="mission-player"
+                        x-text="`P${app.missions.find(m => m.id===mission.id).player}`"
+                      ></a>
+                    </template>
+                    <a
+                      x-text="mission.description"
+                      class="mission-description"
+                    ></a>
+                  </div>
+                </template>
+              </template>
+            </div>
           </div>
         </template>
       </div>
-
-      <h1 x-text="app.skibidi"></h1>
+      <div class="missions">
+        <template x-for="mission in app.missions" :key="mission.id">
+          <template x-if="mission.player==null">
+            <div
+              :id="'miss-' + mission.id"
+              class="mission-card"
+              @dblclick="app.selectMission(mission.id); app.popup.show($event,'selection')"
+              :class="`P${app.missions.find(m => m.id===mission.id).player}-light`"
+              @mousedown="app.selectMission(mission.id); app.is_moving_mission = true; app.missions.find(m => m.id===mission.id).setMoving($event)"
+            >
+              <a x-text="mission.difficulty" class="mission-difficulty"></a>
+              <template
+                x-if="app.missions.find(m => m.id===mission.id).player!=null"
+              >
+                <a
+                  class="mission-player"
+                  x-text="`P${app.missions.find(m => m.id===mission.id).player}`"
+                ></a>
+              </template>
+              <a x-text="mission.description" class="mission-description"></a>
+            </div>
+          </template>
+        </template>
+      </div>
     </div>
   </body>
 </html>

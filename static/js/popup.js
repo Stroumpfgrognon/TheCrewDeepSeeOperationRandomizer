@@ -1,3 +1,5 @@
+import MovableObject from "./moveable.js";
+
 /**
  *
  * @param {string} id
@@ -25,7 +27,7 @@ function getInputElementById(id) {
   return result;
 }
 
-class Popup {
+class Popup extends MovableObject {
   /*
   Definition of the pop-up class.
 
@@ -37,7 +39,6 @@ class Popup {
   - refY : y coordinate of the pop up before it was moved
   - offX : difference between the x position of the mouse and refX
   - off : difference between the y position of the mouse and refY
-  - scale : the zooming scale currently applied to the page
   - dom : the grid inside which is the pop up
   - pop : the pop up element in the html
   - body : the body of the pop up
@@ -55,15 +56,8 @@ class Popup {
 
   */
   constructor() {
+    super(getElementById("popup_area"));
     this.title = getElementById("popup_title");
-    this.refX = 0;
-    this.refY = 0;
-    this.x = 0;
-    this.y = 0;
-    this.offX = 0;
-    this.offY = 0;
-    this.scale = 1;
-    this.dom = getElementById("popup_area");
     this.pop = getElementById("popup");
     this.body = this.pop.children[1];
     this.moving = false;
@@ -77,13 +71,14 @@ class Popup {
     });
   }
 
-  show(str = "") {
+  show(event, str = "") {
     /*
     This function displays the pop up if bind is not empty and the type of pop up is not empty.
     It also sets the title of the pop up according to the type of pop up and changes the attribute pop accordingly as to display the right type of pop up.
     */
 
     // the title that will be given to the pop up
+
     let title = "";
     if (str != "") {
       switch (str) {
@@ -105,15 +100,8 @@ class Popup {
     // we set the title of the pop up
     this.title.textContent = title;
     // we put no padding
-    this.dom.style.left = "0px";
-    this.dom.style.top = "0px";
-    // initial position of the pop up
-    this.x = 0;
-    this.y = 0;
-    this.offX = 0;
-    this.offY = 0;
-    this.refX = 0;
-    this.refY = 0;
+    console.log(event);
+    this.setPosition(0, window.scrollY);
     // we display the pop up
     this.dom.hidden = false;
   }
@@ -123,41 +111,6 @@ class Popup {
     This function hides the pop up in the window
     */
     this.dom.hidden = true;
-  }
-
-  /**
-   *
-   * @param {MouseEvent} event
-   */
-  setMoving(event) {
-    // if start moving the pop up, we store the mouse's position
-    this.moving = true;
-    this.offX = event.clientX;
-    this.offY = event.clientY;
-  }
-
-  clearMoving() {
-    // if we stopped moving, we set the initial position to the current position after the move
-    this.moving = false;
-    this.refX = this.x;
-    this.refY = this.y;
-  }
-
-  /**
-   *
-   * @param {MouseEvent} event
-   */
-  move(event) {
-    /* if we have started moving the popup,
-    we will move it's position according to
-    the mouse's position until the event is stopped
-    */
-    if (this.moving == false) return;
-    this.x = this.refX + event.clientX - this.offX;
-    this.y = this.refY + event.clientY - this.offY;
-    // we move the pop up on the page
-    this.dom.style.left = `${this.x}px`;
-    this.dom.style.top = `${this.y}px`;
   }
 
   done() {

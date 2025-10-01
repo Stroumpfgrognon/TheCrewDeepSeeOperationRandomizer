@@ -119,6 +119,9 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+  z-index:1;
+  cursor: grab;
+  transition: filter 0.2s ease-in-out;
 }
 
 .mission-difficulty {
@@ -142,7 +145,7 @@ body {
   grid-area: description;
 }
 
-.mission-player {
+.mission-player-name {
   grid-area: player;
   text-align: right;
   font-size: 1.5em;
@@ -150,7 +153,24 @@ body {
   margin-bottom: 10px;
 }
 
-.player-missions-container {
+.mission-completed {
+  filter: grayscale(100%);
+  /* opacity: 0.6; */
+}
+
+.mission-completed .mission-description{
+  text-decoration: line-through;
+}
+
+.mission-completed .mission-description ::after{
+  content: " (Completed)";
+}
+/* 
+.mission-completed * {
+  display: none;
+} */
+
+.player-missions-lists-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -162,7 +182,7 @@ body {
   gap: 10px;
 }
 
-.player-missions {
+.player-missions-lists {
   min-width: 100px;
   max-width: 400px;
   width: 100%;
@@ -171,10 +191,10 @@ body {
   padding-bottom:20px;
 }
 
-.player-missions-container:has(.P4-light) .player-missions {
+.player-missions-lists-container:has(.P4-light) .player-missions-lists {
   max-width: 300px;
 }
-.player-missions-container:has(.P5-light) .player-missions {
+.player-missions-lists-container:has(.P5-light) .player-missions-lists {
   max-width: 250px;
 }
 
@@ -183,4 +203,16 @@ body {
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+}
+
+.grabbed{
+  cursor: grabbing !important;
+}
+
+.hidden {
+  display:none !important;
+}
+
+.hidden * {
+  display:none !important;
 }

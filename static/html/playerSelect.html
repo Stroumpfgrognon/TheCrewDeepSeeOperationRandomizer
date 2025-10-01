@@ -1,6 +1,7 @@
 <div
-  class="popup-center"
+  class="popup-center popup-view"
   style="height:100%;"
+  :style="`background-color : var(--ui-P${app.popup.behaviour.hovered_player}-light)`"
 >
   <div class="select-player">
     <button @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(1)"  @click="app.setPlayer(1); app.popup.done()" class="P1">P1</button>

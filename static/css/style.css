@@ -1,10 +1,10 @@
 :root {
-  --bg-color: #252525;
+  --bg-color: #082330;
   --svg-color: rgb(174, 174, 174);
-  --ui-color: #474747;
+  --ui-color: #06494a;
   --ui-color-op: rgba(30, 30, 30, 0.511);
-  --ui-highlight: #5d5d5d;
-  --ui-highlight-subtle: rgb(57, 57, 57);
+  --ui-highlight: #00b2b5;
+  --ui-highlight-subtle: #007172;
   --ui-text-color: white;
   --ui-danger: #ef233c;
   --ui-danger-detail: #530d15;
@@ -35,18 +35,28 @@
     opacity: 100%;
   }
 }
+html {
+  min-height: 100%;
+}
 
 body {
-  overflow-x:hidden;
-  overflow-y:scroll;
+  overflow-x: hidden;
+  height: 100%;
+  overflow-y: scroll;
+  background: content-box
+    radial-gradient(var(--ui-highlight) 0%, var(--bg-color) 80%);
+  background-color: var(--bg-color);
+  /* background-position-y: 50px; */
+  background-repeat: no-repeat;
 }
 
 .container {
   margin: auto;
-  display: block;
   width: 100%;
   align-self: center;
   text-align: center;
+  min-height: 530px;
+  height: 100%;
 }
 
 .P1 {
@@ -103,15 +113,16 @@ body {
   border-radius: 15px;
   padding: 10px;
   margin: 10px;
-  width: 150px;
-  aspect-ratio: 1/1;
+  width: 120px;
+  /* aspect-ratio: 1/1; */
   background-color: lightgrey;
   box-shadow: 5px 5px 5px grey;
   display: grid;
   grid-template:
     "level player"
-    "description description" / 20% 80%;
-  grid-template-rows: 25% 75%;
+    "empty empty"
+    "description description" / 25% auto;
+  grid-template-rows: 25px 10px auto;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -119,7 +130,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-  z-index:1;
+  z-index: 1;
   cursor: grab;
   transition: filter 0.2s ease-in-out;
 }
@@ -141,7 +152,7 @@ body {
   text-align: center;
   height: 70%;
   max-height: 100%;
-  text-align: justify;
+  text-align: left;
   grid-area: description;
 }
 
@@ -150,7 +161,6 @@ body {
   text-align: right;
   font-size: 1.5em;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .mission-completed {
@@ -158,11 +168,11 @@ body {
   /* opacity: 0.6; */
 }
 
-.mission-completed .mission-description{
+.mission-completed .mission-description {
   text-decoration: line-through;
 }
 
-.mission-completed .mission-description ::after{
+.mission-completed .mission-description ::after {
   content: " (Completed)";
 }
 /* 
@@ -186,9 +196,13 @@ body {
   min-width: 100px;
   max-width: 400px;
   width: 100%;
-  min-height: 250px;
+  min-height: 150px;
   height: fit-content;
-  padding-bottom:20px;
+  padding-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
 }
 
 .player-missions-lists-container:has(.P4-light) .player-missions-lists {
@@ -205,14 +219,252 @@ body {
   animation-timing-function: ease-in-out;
 }
 
-.grabbed{
+.grabbed {
   cursor: grabbing !important;
 }
 
 .hidden {
-  display:none !important;
+  display: none !important;
 }
 
 .hidden * {
-  display:none !important;
+  display: none !important;
+}
+
+.title {
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+  font-size: 3em;
+  margin-bottom: 0px;
+}
+
+.subtitle {
+  color: rgb(235, 235, 235);
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0.5em;
+}
+
+.main-container {
+  margin: 20px;
+  /* background-color: var(--ui-highlight-subtle);   */
+  /* border-radius: 30px; */
+  padding: 20px;
+  margin-top: 0px;
+  min-height: 100%;
+  background: rgba(0, 178, 181, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+  border: 1px solid rgba(0, 178, 181, 0.45);
+}
+
+.parameters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  background: radial-gradient(
+    var(--ui-highlight-subtle) 0%,
+    var(--bg-color) 70%
+  );
+  background-color: var(--bg-color);
+  padding: 1em;
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 1em;
+  align-self: center;
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  background-blend-mode: color;
+  box-shadow: 0 0 15px 8px var(--ui-highlight-subtle) inset;
+}
+
+.parameters .difficulty {
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.parameters .difficulty,
+select {
+  box-shadow: inset 0px 0px 15px 0px var(--ui-color);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-color) 15%,
+    var(--ui-color) 100%
+  );
+  background-color: var(--bg-color);
+  border: 1px solid var(--ui-highlight);
+  color: var(--ui-highlight);
+}
+
+.paramaters a {
+  font-size: 20px;
+}
+
+.parameters select,
+input {
+  font-size: 20px;
+}
+
+.difficulty {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: stretch;
+  /* border: 7px solid var(--ui-highlight);
+  background-color: var(--bg-color); */
+  border-radius: 16px;
+  padding: 5px;
+}
+
+.difficulty input:after {
+  content: "Level ";
+  display: block;
+}
+
+.difficulty input {
+  background-color: var(--ui-color);
+  color: var(--ui-highlight);
+  margin-top: 5px;
+  text-align: center;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  text-indent: 15px;
+  transition: text-indent 0.3s ease-in-out;
+}
+
+.difficulty input:focus {
+  text-indent: 65%;
+}
+
+.difficulty a {
+  color: var(--ui-highlight);
+}
+
+.custom-select {
+  position: relative;
+  width: 9em;
+}
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 10px;
+  /* background-color: var(--bg-color);
+  border: 7px solid var(--ui-highlight); */
+  border-radius: 16px;
+  /* color: var(--ui-highlight); */
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--ui-highlight);
+  clip-path: polygon(50% 80%, 0 20%, 100% 20%);
+}
+
+.bauble_box {
+  margin-top: -10px;
+}
+
+.bauble_box .bauble_label {
+  background: var(--ui-ok);
+  background-position: 62px 5px;
+  background-repeat: no-repeat;
+  background-size: auto 5px;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.4),
+    0 -1px 0px rgba(0, 0, 0, 0.2), inset 0 -1px 0px #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0;
+  height: 30px;
+  position: relative;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  width: 70px;
+}
+
+.bauble_box .bauble_label:before {
+  background-color: rgba(255, 255, 255, 0.2);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 30% auto;
+  border-radius: 50%;
+  box-shadow: inset 0 -5px 25px var(--ui-ok-detail),
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  content: "";
+  display: block;
+  height: 20px;
+  left: 5px;
+  position: absolute;
+  top: 5px;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  width: 20px;
+  z-index: 2;
+}
+
+.bauble_box input.bauble_input {
+  opacity: 0;
+  z-index: 0;
+}
+
+/* Checked */
+.bauble_box input.bauble_input:checked + .bauble_label {
+  background-color: var(--ui-detail);
+}
+
+.bauble_box input.bauble_input:checked + .bauble_label:before {
+  background-position: 150% 0;
+  box-shadow: inset 0 -5px 25px var(--ui-detail-detail),
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  left: calc(100% - 25px);
+}
+
+.bauble_explain {
+  display: flex;
+  gap: 2em;
+}
+
+.operation-start {
+  box-shadow: inset 0px 0px 15px 0px var(--ui-color);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-color) 15%,
+    var(--ui-color) 100%
+  );
+  background-color: var(--ui-color);
+  border: 1px solid var(--ui-highlight);
+  border-radius: 24px;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--ui-highlight);
+  font-family: Arial;
+  font-size: 15px;
+  padding: 10px 23px;
+  text-decoration: none;
+  /* text-shadow: 0px 1px 0px #263666; */
 }

@@ -14,7 +14,7 @@
   --ui-detail-detail: #112f44;
   --ui-P1: #f20f2a;
   --ui-P2: #0081dd;
-  --ui-P3: #ffbf00;
+  --ui-P3: #e3aa00;
   --ui-P4: #00ad26;
   --ui-P5: #7f23ff;
   --ui-P1-light: #ffbec6;
@@ -52,6 +52,7 @@ body {
 
 .container {
   margin: auto;
+  display: block;
   width: 100%;
   align-self: center;
   text-align: center;
@@ -113,7 +114,7 @@ body {
   border-radius: 15px;
   padding: 10px;
   margin: 10px;
-  width: 120px;
+  width: 150px;
   /* aspect-ratio: 1/1; */
   background-color: lightgrey;
   box-shadow: 5px 5px 5px grey;
@@ -122,7 +123,7 @@ body {
     "level player"
     "empty empty"
     "description description" / 25% auto;
-  grid-template-rows: 25px 10px auto;
+  grid-template-rows: 1.5em 10px auto;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -143,11 +144,13 @@ body {
   border: 2px solid black;
   aspect-ratio: 1;
   border-radius: 200px;
+  height: 100%;
   grid-area: level;
+  line-height: 97%;
 }
 
 .mission-description {
-  font-size: 1em;
+  font-size: 1.2em;
   height: auto;
   text-align: center;
   height: 70%;
@@ -185,11 +188,14 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-evenly;
+  align-self: center;
   height: 100%;
-  width: 100%;
+  width: 96%;
   flex-wrap: nowrap;
   align-content: center;
   gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .player-missions-lists {
@@ -201,8 +207,8 @@ body {
   padding-bottom: 20px;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(12.5px);
-  -webkit-backdrop-filter: blur(12.5px);
+  /* backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px); */
 }
 
 .player-missions-lists-container:has(.P4-light) .player-missions-lists {
@@ -253,7 +259,7 @@ body {
   margin: 20px;
   /* background-color: var(--ui-highlight-subtle);   */
   /* border-radius: 30px; */
-  padding: 20px;
+  padding-bottom: 20px;
   margin-top: 0px;
   min-height: 100%;
   background: rgba(0, 178, 181, 0.3);
@@ -277,15 +283,14 @@ body {
     var(--bg-color) 70%
   );
   background-color: var(--bg-color);
-  padding: 1em;
-  max-width: 70%;
-  margin: auto;
-  margin-bottom: 1em;
+  padding: 1.5em;
+  max-width: 100%;
+  margin-bottom: 1.5em;
   align-self: center;
-  border-radius: 16px;
+  border-radius: 16px 16px 0px 0px;
   backdrop-filter: blur(16px);
   background-blend-mode: color;
-  box-shadow: 0 0 15px 8px var(--ui-highlight-subtle) inset;
+  box-shadow: inset 0px -5px 60px -10px var(--ui-highlight);
 }
 
 .parameters .difficulty {
@@ -306,13 +311,14 @@ select {
   color: var(--ui-highlight);
 }
 
-.paramaters a {
-  font-size: 20px;
+.parameters a,
+button {
+  font-size: 1.3em;
 }
 
 .parameters select,
 input {
-  font-size: 20px;
+  font-size: 1.3em;
 }
 
 .difficulty {
@@ -346,7 +352,7 @@ input {
 }
 
 .difficulty input:focus {
-  text-indent: 65%;
+  text-indent: 50%;
 }
 
 .difficulty a {
@@ -462,8 +468,6 @@ input {
   display: inline-block;
   cursor: pointer;
   color: var(--ui-highlight);
-  font-family: Arial;
-  font-size: 15px;
   padding: 10px 23px;
   text-decoration: none;
   /* text-shadow: 0px 1px 0px #263666; */

@@ -16,6 +16,7 @@
     x-data="{app: new App()}"
     @mousemove="app.handleMouseMove($event)"
     @mouseup="app.handleMouseUp()"
+    @keyup.escape="app.popup.done(); app.selected_mission_id=null"
   >
     <h1 class="title">THE CREW : Mission Deep Sea</h1>
     <h2 class="subtitle">Mission Randomizer</h2>
@@ -25,7 +26,10 @@
         class="blocking hidden"
         :class="{'hidden': app.popup.hidden}"
       >
-        <div id="popup" @click.outside="app.popup.done()">
+        <div
+          id="popup"
+          @click.outside="app.popup.done(); app.selected_mission_id=null"
+        >
           <div
             class="popuptop"
             @mousedown="app.popup.setMoving($event)"
@@ -34,7 +38,7 @@
             <h3 id="popup_title">Popup</h3>
             <button
               id="popup_exit"
-              @click="app.popup.done(event); app.handleMouseUp()"
+              @click="app.popup.done(event); app.selected_mission_id=null"
             >
               X
             </button>
@@ -52,7 +56,7 @@
             </select>
           </div>
           <div class="difficulty">
-            <a>Difficulty (1-100)</a>
+            <a>Difficulty</a>
             <input
               type="number"
               x-model="app.difficulty"

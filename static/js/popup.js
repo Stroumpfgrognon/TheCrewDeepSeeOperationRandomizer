@@ -65,11 +65,6 @@ class Popup extends MovableObject {
     this.inputmode = false;
     this.hidden= true;
     // If the user presses escape, the pop up is closed
-    window.addEventListener("keyup", (event) => {
-      if (event.key === "Escape") {
-        this.close();
-      }
-    });
   }
 
   show(event, str = "") {

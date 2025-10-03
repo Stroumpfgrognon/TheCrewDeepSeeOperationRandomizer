@@ -1,16 +1,19 @@
-# Random mission generator for THE CREW : Mission Deep Sea
+# Operation randomizer for THE CREW : Mission Deep Sea
 
-This tool helps generate the list of missions for a crew, depending on the amount of players playing (first argument) and the level of the mission (second argument). 
+This tool helps generate the list of missions for a crew, depending on the amount of players playing (first argument) and the level of the mission (second argument).
 
 The missions are selected at random and kept until the exact level of the mission is attained, like the rules state.
 
+# Command-line tool
+
 ## Usage example
 
-> python ./crewMissionRandomizer.py 3 8
+> python ./crewOperationRandomizer.py 3 8
 
 Will find missions for 3 players at a total difficulty of 8.
 
-Example of result of said command : 
+Example of result of said command :
+
 ```
  Missions for this operation:
   (3) : Win exactly two blue cards.
@@ -21,9 +24,11 @@ Example of result of said command :
 With format (_Difficulty_) - _Description_
 
 ## Adaptation for classical playing cards
+
 There is also a translation system for a regular 54 cards game that can be activated by adding any non-zero numbered third argument.
 
-> python ./crewMissionRandomizer.py 3 8 1
+> python ./crewOperationRandomizer.py 3 8 1
+
 ```
  Missions for this operation:
   (1) : Win no [ faces 🃛🂭🂾 or jokers 🂿 ]
@@ -34,23 +39,38 @@ There is also a translation system for a regular 54 cards game that can be activ
  Reminder : Submarine order is J, 🂿, Q, K. Captain is 🂿
 ```
 
-The adaptation is based on the following : 
+The adaptation is based on the following :
 
-| Original | Adapted |
-| :--------: | :-------: |
-| Submarines (1,2,3,4) | (J,🂿,Q,K) with 🂿 for captain|
-| Blue | Spade ♠ |
-| Pink | Heart ♥ |
-| Yellow | Diamond ♦ |
-| Green | Club ♣ |
+|       Original       |           Adapted            |
+| :------------------: | :--------------------------: |
+| Submarines (1,2,3,4) | (J,🂿,Q,K) with 🂿 for captain |
+|         Blue         |           Spade ♠            |
+|         Pink         |           Heart ♥            |
+|        Yellow        |          Diamond ♦           |
+|        Green         |            Club ♣            |
 
 ## Customisation
 
-Additional custom missions can be added in the *bin/custom_missions.txt* file by using the same format as the original ones in *bin/missions.txt*. The format is (Difficulty) Description with Difficulty being for (3/4/5) players.
+Additional custom missions can be added in the _bin/custom_missions.txt_ file by using the same format as the original ones in _bin/missions.txt_. The format is (Difficulty) Description with Difficulty being for (3/4/5) players.
+
+# Web interface
+
+The Web interface uses flask to serve the files and webbrowser to automatically open your browser on the page on startup.
+
+To start the interface, simply run
+
+> python ./webInterface.typ
+
+Which will open the interface on your default browser. You can close the server using CTRL + C.
+
+![Web interface screenshot](/static/images/screenshot.png)
+
+The web interface uses the command-line tool as a backend so the way to add custom missions is the same as in the command-line tool. 
+
+The server needs to be restarted when new missions are added.
 
 ## Ressources
 
 For premade operations from physical the game, see [this fan-made mission sheet](https://desktopgames.com.ua/games/6389/the_crew_2_mission_sheet_v1c_en.pdf?srsltid=AfmBOorRTjvEAGTZIKLItwlM81yBnoAYrTeMrZYyuwdJ0hrtgVMM_T7G) by Thomas Sing.
 
 The list of official missions was taken from [this blog post](https://boardgamegeek.com/thread/2631311/all-the-mission-cards)
-

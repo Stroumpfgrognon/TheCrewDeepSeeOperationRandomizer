@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Crew Mission Generator</title>
+    <link rel="icon" type="image/png" href="/static/images/icon.ico" />
+    <title>The Crew Deep Sea Operation Randomizer</title>
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/popup.css" />
     <script type="module" src="/static/js/app.js" defer></script>
@@ -18,8 +19,8 @@
     @mouseup="app.handleMouseUp()"
     @keyup.escape="app.popup.done(); app.selected_mission_id=null"
   >
-    <h1 class="title">THE CREW : Mission Deep Sea</h1>
-    <h2 class="subtitle">Mission Randomizer</h2>
+    <h1 class="title">THE CREW : Mission Deep Sea - Operation randomizer</h1>
+    <!-- <h2 class="subtitle">Operation Randomizer</h2> -->
     <div class="main-container">
       <div
         id="popup_area"
@@ -43,7 +44,55 @@
               X
             </button>
           </div>
-          <div id="popup_body" class="popup_rounded"></div>
+          <div id="popup_body" class="popup_rounded">
+            <div
+              class="popup-center popup-view"
+              style="height: 100%"
+              :style="`background-color : var(--ui-P${app.popup.behaviour.hovered_player}-light)`"
+            >
+              <div class="select-player">
+                <button
+                  @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(1)"
+                  @click="app.setPlayer(1); app.popup.done()"
+                  class="P1"
+                >
+                  P1
+                </button>
+                <button
+                  @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(2)"
+                  @click="app.setPlayer(2); app.popup.done()"
+                  class="P2"
+                >
+                  P2
+                </button>
+                <button
+                  @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(3)"
+                  @click="app.setPlayer(3); app.popup.done()"
+                  class="P3"
+                >
+                  P3
+                </button>
+                <template x-if="app.current_players>=4">
+                  <button
+                    @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(4)"
+                    @click="app.setPlayer(4); app.popup.done()"
+                    class="P4"
+                  >
+                    P4
+                  </button>
+                </template>
+                <template x-if="app.current_players>=5">
+                  <button
+                    @mouseover.prevent="app.popup.behaviour.setHoveredPlayer(5)"
+                    @click="app.setPlayer(5); app.popup.done()"
+                    class="P5"
+                  >
+                    P5
+                  </button>
+                </template>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="container">
@@ -86,8 +135,20 @@
               Start operation !
             </button>
           </div>
+          <a style="flex: 0 0 100%"
+            >Captain is player with Black 2 / Submarine 2 / Joker</a
+          >
         </div>
-
+        <!-- <template
+          x-if="app.missions.find(m => !m.completed) === undefined && app.missions.length > 0"
+        > -->
+        <h1
+          class="victory hidden-light"
+          :class="{'hidden-light' : !(app.missions.find(m => !m.completed) === undefined && app.missions.length > 0)}"
+        >
+          Victory !! Ready to start a new operation ?
+        </h1>
+        <!-- </template> -->
         <div class="player-missions-lists-container">
           <template x-for="i in parseInt(app.current_players)">
             <div
@@ -95,7 +156,10 @@
               class="player-missions-lists"
               :class="`P${i}-light`"
             >
-              <a class="mission-player-name" x-text="`P${i}`"></a>
+              <a
+                class="mission-player-name"
+                x-text="`${app.playerNames[i]}`"
+              ></a>
               <div class="missions">
                 <template x-for="mission in app.missions" :key="mission.id">
                   <template x-if="mission.player==i">

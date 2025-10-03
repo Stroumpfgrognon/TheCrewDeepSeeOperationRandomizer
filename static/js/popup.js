@@ -63,7 +63,7 @@ class Popup extends MovableObject {
     this.moving = false;
     this.behaviour = new PopupBehaviour();
     this.inputmode = false;
-    this.hidden= true;
+    this.hidden = true;
     // If the user presses escape, the pop up is closed
   }
 
@@ -112,7 +112,7 @@ class Popup extends MovableObject {
     // This function suppresses traces
     // of the pop up in the html once
     // we have finished using it
-    this.body.innerHTML = "";
+    // this.body.innerHTML = "";
     this.title.textContent == "Popup";
     this.behaviour.done();
     this.close();
@@ -160,7 +160,9 @@ class playerSelectPopup extends PopupBehaviour {
 
   hovered_player = null;
   constructor() {
-    super("static/html/playerSelect.html");
+    // super("static/html/playerSelect.html");
+    // Since there is currently a single popup, we directly put the html code in the interface
+    super();
     this.key = "";
   }
 

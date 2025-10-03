@@ -40,6 +40,7 @@ class Mission extends MovableObject {
 
 class App {
   players;
+  playerNames = ["", "P1 - Captain", "P2", "P3", "P4", "P5"];
   current_players;
   difficulty;
   missions;
@@ -93,7 +94,12 @@ class App {
     this.popup.move(event);
     this.missions.forEach((m) => m.move(event));
     let attributed_player = null;
-    if (this.is_moving_mission && this.selected_mission_id !== null && this.missions.find((m) => m.id === this.selected_mission_id).completed === false) {
+    if (
+      this.is_moving_mission &&
+      this.selected_mission_id !== null &&
+      this.missions.find((m) => m.id === this.selected_mission_id).completed ===
+        false
+    ) {
       for (let i = 0; i < this.current_players; i++) {
         let pm = document.getElementById("P" + (i + 1) + "-missions");
         let pos = [event.clientX, event.clientY];

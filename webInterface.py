@@ -3,11 +3,11 @@ from flask import Flask, render_template, request, redirect, make_response,send_
 from crewOperationRandomizer import generate_missions
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="") #On accèdera directement au fichiers static par défaut
 
 @app.route('/',methods=['GET'])
 def index():
-    return send_from_directory("static/html","Interface.html")
+    return send_from_directory("static/","index.html")
 
 @app.route('/generate',methods=['GET'])
 def generate():

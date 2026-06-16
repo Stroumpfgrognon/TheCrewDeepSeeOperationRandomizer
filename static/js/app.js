@@ -1,11 +1,9 @@
 import Popup from "./popup.js";
 import MovableObject from "./moveable.js";
-import MissionList from "./mission_picker.js";
-import { original_missions } from "./mission_picker.js";
 
 let mission_id = 0;
 
-class Mission_DOM extends MovableObject {
+class Mission extends MovableObject {
   id;
   difficulty;
   description;
@@ -45,7 +43,6 @@ class App {
   playerNames = ["", "P1 - Captain", "P2", "P3", "P4", "P5"];
   current_players;
   difficulty;
-  all_missions;
   missions;
   converted;
   popup;
@@ -54,6 +51,10 @@ class App {
   player_to_attribute;
 
   constructor() {
+    this._init();
+  }
+
+  _init() {
     this.players = 3;
     this.current_players = 3;
     this.difficulty = 3;
@@ -62,7 +63,6 @@ class App {
     this.missions = [];
     this.is_moving_mission = false;
     this.popup = new Popup();
-    this.all_missions = new MissionList(original_missions);
   }
 
   handleMouseUp() {
@@ -162,27 +162,22 @@ class App {
   generateMissions() {
     this.current_players = this.players;
     this.clearMissions();
-    // fetch(
-    //   "/generate?players=" +
-    //     this.players +
-    //     "&difficulty=" +
-    //     this.difficulty +
-    //     "&converted=" +
-    //     this.converted
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     for (let i = 0; i < data.length; i++) {
-    //       let mission = new Mission(data[i].difficulty, data[i].description);
-    //       this.missions.push(mission);
-    //     }
-    //     console.log(this.missions);
-    //   });
-    this.missions = this.all_missions.pick_random_mission(
-      this.players,
-      this.difficulty,
-      this.converted
-    ).map(miss => new Mission_DOM(miss[0], miss[1]));
+    fetch(
+      "/generate?players=" +
+        this.players +
+        "&difficulty=" +
+        this.difficulty +
+        "&converted=" +
+        this.converted
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          let mission = new Mission(data[i].difficulty, data[i].description);
+          this.missions.push(mission);
+        }
+        console.log(this.missions);
+      });
   }
 }
 

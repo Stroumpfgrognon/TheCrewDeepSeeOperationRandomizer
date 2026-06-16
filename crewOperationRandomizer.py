@@ -15,14 +15,21 @@ else :
         sys.exit(1)
 
 if len(sys.argv) >=4:
-    replace_color = bool(int(sys.argv[3]))
+    try:
+        replace_color = bool(int(sys.argv[3]))
+    except ValueError:
+        try:
+            replace_color = bool(str(sys.argv[3]))
+        except ValueError:
+            print("Third argument must be a boolean (0/1 or true/false)")
+            sys.exit(1)
 
 class Mission:
     def __init__(self, level: str):
         match = re.match(r"\((\d)/(\d)/(\d)\) (.+)", level)
         if match:
             self.levels = [int(match.group(1)), int(match.group(2)), int(match.group(3))]
-            self.descriptionAlt = match.group(4).replace("green","club ♣").replace("blue","spade ♠").replace("pink","heart ♥").replace("yellow","diamond ♦").replace("submarines","[ faces 🃛🂭🂾 or jokers 🂿 ]").replace("submarine","[ face 🃛🂭🂾 or joker 🂿 ]")
+            self.descriptionAlt = match.group(4).replace("green","♣").replace("blue","♠").replace("pink","♥").replace("yellow","♦").replace("submarines","J/Q/K/🂿").replace("submarine","J/Q/K/🂿")
             self.description = match.group(4)
         else:
             self.levels = []
@@ -35,7 +42,7 @@ class Mission:
             return self.descriptionAlt
         return self.description
     def __str__(self) -> str:
-        return f"- ({self.getLevel()}) : {self.description}"
+        return f"- ({self.getLevel()}) : {self.getDescription()}"
 
 mission_object = []
 with open("bin/missions.txt", "r", encoding="utf-8") as file:
@@ -60,8 +67,10 @@ def generate_missions(players: int, level: int):
 
 if __name__ == "__main__":
     missions_for_now = generate_missions(nbPlayers, missionLevel)
-    print("\n Missions for this operation:")
+    print("\nMissions for this operation:")
     for mission in missions_for_now:
         print(f"  {mission}")
-    if replace_color : print(" Reminder : Submarine order is J, 🂿, Q, K. Captain is 🂿 \n")
-    else: print("")
+    print("")
+    print("> Reminder : If a mission doesn't mention Submarines/Black, only colored cards are valid for the mission")
+    if replace_color : print("> Reminder n°2 : Faces & Joker 1,2,3,4 are J,Q,K,🂿 in order. Captain is 🂿")
+    print("")

@@ -15,10 +15,15 @@ Will find missions for 3 players at a total difficulty of 8.
 Example of result of said command :
 
 ```
- Missions for this operation:
-  (3) : Win exactly two blue cards.
-  (2) : Win the blue 5 and pink 8
-  (3) : Win exactly three consecutive tricks.
+
+Missions for this operation:
+  - (2) : Win exactly two tricks
+  - (1) : Win the blue 4
+  - (3) : Don’t win any yellow or green cards
+  - (2) : Win a trick that has only even numbers (2,4,6,8)
+
+> Reminder : If a mission doesn't mention Submarines/Black, only colored cards are valid for the mission
+
 ```
 
 With format (_Difficulty_) - _Description_
@@ -30,20 +35,22 @@ There is also a translation system for a regular 54 cards game that can be activ
 > python ./crewOperationRandomizer.py 3 8 1
 
 ```
- Missions for this operation:
-  (1) : Win no [ faces 🃛🂭🂾 or jokers 🂿 ]
-  (2) : Win the same amount of club ♣ and diamond ♦ cards in a trick (more than 0)
-  (1) : Win more diamond ♦ cards than spade ♠ cards (0 spade ♠ cards are allowed)
-  (3) : Win a trick with a total value lower than 8/12/16 (3/4/5 players) without [ faces 🃛🂭🂾 or jokers 🂿 ]
-  (1) : Win the heart ♥ 3
- Reminder : Submarine order is J, 🂿, Q, K. Captain is 🂿
+
+Missions for this operation:
+  - (2) : Win a trick with a 5.
+  - (2) : Win exactly two tricks
+  - (4) : Win exactly one ♥ and one ♣ card
+
+> Reminder : If a mission doesn't mention Submarines/Black, only colored cards are valid for the mission
+> Reminder n°2 : Faces & Joker 1,2,3,4 are J,Q,K,🂿 in order. Captain is 🂿
+
 ```
 
 The adaptation is based on the following :
 
 |       Original       |           Adapted            |
 | :------------------: | :--------------------------: |
-| Submarines (1,2,3,4) | (J,🂿,Q,K) with 🂿 for captain |
+| Submarines (1,2,3,4) | (J,Q,K,🂿) with 🂿 for captain |
 |         Blue         |           Spade ♠            |
 |         Pink         |           Heart ♥            |
 |        Yellow        |          Diamond ♦           |
@@ -59,7 +66,7 @@ The Web interface uses flask to serve the files and webbrowser to automatically 
 
 To start the interface, simply run
 
-> python ./webInterface.typ
+> python ./webInterface.py
 
 Which will open the interface on your default browser. You can close the server using CTRL + C.
 

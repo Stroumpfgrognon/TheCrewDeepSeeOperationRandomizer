@@ -113,7 +113,7 @@ function shuffle(array) {
 }
 
 function convert_description(desc) {
-    return desc.replace("green","club ♣").replace("blue","spade ♠").replace("pink","heart ♥").replace("yellow","diamond ♦").replace("submarines","[ faces 🃛🂭🂾 or jokers 🂿 ]").replace("submarine","[ face 🃛🂭🂾 or joker 🂿 ]")
+    return desc.replace("green","♣").replace("blue","♠").replace("pink","♥").replace("yellow","♦").replace("submarines","J/Q/K/🂿").replace("submarine","J/Q/K/🂿")
 }
 
 class Mission {
